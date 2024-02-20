@@ -37,7 +37,7 @@ export const useAuthStore = defineStore("auth", {
             });
             console.warn(response.data);
             if(response.status === 200){
-                // this.isloading = false;
+                this.isloading = false;
                 localStorage.removeItem("token");
                 navigateTo("/login");
             }

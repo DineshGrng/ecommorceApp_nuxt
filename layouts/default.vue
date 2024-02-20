@@ -15,10 +15,15 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn variant="text" icon="mdi-magnify"></v-btn>
+        <!-- <v-btn variant="text" icon="mdi-magnify"></v-btn> -->
 
-        <v-btn variant="text" prepend-icon="mdi-cart">1</v-btn>
-   <v-btn
+        <v-btn
+          variant="text"
+          prepend-icon="mdi-cart"
+          @click="$router.push('/carts')"
+          >{{ cartStore.items.length }}</v-btn
+        >
+        <v-btn
           variant="text"
           prepend-icon="mdi-login"
           text="Logout"
@@ -38,10 +43,8 @@
           prepend-icon="mdi-login"
           text="login"
           @click="$router.push('/login')"
-          v-else  
+          v-else
         ></v-btn>
-
-     
       </v-app-bar>
 
       <v-navigation-drawer v-model="drawer" location="left" temporary>
@@ -57,6 +60,9 @@
 <script setup>
 import { useAuthStore } from "~/store/auth";
 const authStore = useAuthStore();
+import { useCartStore } from "~/store/cart";
+const cartStore = useCartStore();
+cartStore.getCartItems();
 authStore.getToken();
 import { ref, watch } from "vue";
 

@@ -9,13 +9,10 @@
       ></v-progress-linear>
     </template>
 
-    <v-img
-      height="250"
-      :src="product.image"
-    ></v-img>
+    <v-img height="250" :src="product.image" :lazy-src="product.image"></v-img>
 
     <v-card-item>
-      <v-card-title>{{product.name}}</v-card-title>
+      <v-card-title>{{ product.name }}</v-card-title>
 
       <v-card-subtitle>
         <span class="me-1">Local Favorite</span>
@@ -39,10 +36,13 @@
       </v-row>
 
       <div class="my-4 text-subtitle-1">
-        <span class="me-2">Rs.{{product.sellingPrice}}</span>
-        <span class="text-decoration-line-through text-red" v-if="product.discount">Rs.{{product.price}}</span>
+        <span class="me-2">Rs.{{ product.sellingPrice }}</span>
+        <span
+          class="text-decoration-line-through text-red"
+          v-if="product.discount"
+          >Rs.{{ product.price }}</span
+        >
       </div>
-
     </v-card-text>
 
     <v-divider class="mx-4 mb-1"></v-divider>
@@ -51,29 +51,41 @@
 
     <div class="px-4">
       <v-btn icon="mdi-minus " @click="remove()"></v-btn>
-      <v-label class="px-5 text-h5">{{count}}</v-label>
+      <v-label class="px-5 text-h5">{{ count }}</v-label>
       <v-btn icon="mdi-plus" @click="add()"></v-btn>
     </div>
 
     <v-card-actions>
-      <v-btn color="deep-purple-lighten-2" variant="text" @click="reserve">
-        Add to Cart 
+      <v-btn
+        color="deep-purple-lighten-2"
+        variant="text"
+        @click="
+          cartStore.addToCart({
+            product_id: product.id,
+            qty: count,
+            price: product.sellingPrice,
+          })
+        "
+      >
+        Add to Cart
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 <script setup>
+import { useCartStore } from "~/store/cart";
+const cartStore = useCartStore();
 const count = ref(1);
-function add(){
+function add() {
   count.value++;
 }
-function remove(){
+function remove() {
   count.value--;
-  if (count.value<1){
+  if (count.value < 1) {
     count.value = 1;
   }
 }
 defineProps({
-  product:{},
-})
+  product: {},
+});
 </script>
