@@ -11,7 +11,15 @@
           @click.stop="drawer = !drawer"
         ></v-app-bar-nav-icon>
 
-        <v-toolbar-title>eCommerce</v-toolbar-title>
+        <v-toolbar-title>
+          <v-btn
+          variant="text"
+          prepend-icon="mdi-cart"
+          @click="$router.push('/')"
+          >  eCommerce</v-btn
+        >
+        
+          </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -48,7 +56,18 @@
       </v-app-bar>
 
       <v-navigation-drawer v-model="drawer" location="left" temporary>
-        <v-list :items="items"></v-list>
+        <v-list>
+           <v-list-item
+            link
+            v-for="category in categoryStore.categories"
+            :key="category"
+            :value="category.id"
+
+            @click="productStore.getProductsByCategory(category.id)"
+            >{{category.name}}</v-list-item>
+         
+        </v-list>
+       
       </v-navigation-drawer>
 
       <v-main>
@@ -60,10 +79,22 @@
 <script setup>
 import { useAuthStore } from "~/store/auth";
 const authStore = useAuthStore();
+
 import { useCartStore } from "~/store/cart";
 const cartStore = useCartStore();
+
+import { usecategoryStore } from "~/store/categories";
+const categoryStore = usecategoryStore();
+
+import { useProductStore } from "~/store/product";
+const productStore = useProductStore();
+await productStore.getProducts();
+
 cartStore.getCartItems();
 authStore.getToken();
+await categoryStore.getCategory();
+
+
 import { ref, watch } from "vue";
 
 const drawer = ref(false);

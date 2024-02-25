@@ -20,5 +20,19 @@ export const useProductStore = defineStore('product', {
                 this.loading = false;
             }
         },
+
+        async getProductsByCategory(categoryId) {
+            try {
+                this.loading = true;
+                var response = await axiosApi.get(`categories/${categoryId}`);
+                if (response.status === 200) {
+                    this.products = response.data.data;
+                }
+            } catch (e) {
+                console.warn(e);
+            } finally {
+                this.loading = false;
+            }
+        },
     },
 });
