@@ -2,11 +2,16 @@
   <div class="bg-blue-lighten-5">
     <v-container>
       <!-- {{ cartStore.items }} -->
-
+      <v-btn
+          variant="tonal"
+          prepend-icon="mdi-arrow-left"
+          @click="$router.push('/')"
+          >  back</v-btn
+        >
       <v-row>
         <div v-for="p in cartStore.items" :key="p.id">
           <v-col>
-            <v-card :loading="loading" class="mx-auto my-12" width="274" >
+            <v-card :loading="loading" class="mx-auto my-3" width="274">
               <template v-slot:loader="{ isActive }">
                 <v-progress-linear
                   :active="isActive"
@@ -33,8 +38,6 @@
               <v-divider class="mx-4 mb-1"></v-divider>
 
               <v-card-title>Tonight's availability</v-card-title>
-
-             
 
               <v-card-actions>
                 <v-btn color="orange"> Share </v-btn>
