@@ -1,14 +1,21 @@
 <template>
   <div class="bg-blue-lighten-5">
     <v-container>
-      <!-- {{ cartStore.items }} -->
-      <v-btn
+      <!-- {{ cartStore.orderData }} -->
+      <section class="my-5">
+        <v-btn
           variant="tonal"
           prepend-icon="mdi-arrow-left"
+          rounded="x-large"
+          class="bg-blue-lighten-3"
+          size="large"
           @click="$router.push('/')"
-          >  back</v-btn
         >
-      <v-row>
+          back</v-btn
+        >
+      </section>
+      <section>
+        <v-row>
         <div v-for="p in cartStore.items" :key="p.id">
           <v-col>
             <v-card :loading="loading" class="mx-auto my-3" width="274">
@@ -32,22 +39,29 @@
               </v-card-item>
 
               <v-card-text>
-                <div>{{ p.product }}</div>
+                <div class="text-h5">{{ p.product }}</div>
               </v-card-text>
 
               <v-divider class="mx-4 mb-1"></v-divider>
 
-              <v-card-title>Tonight's availability</v-card-title>
-
-              <v-card-actions>
-                <v-btn color="orange"> Share </v-btn>
-
-                <v-btn color="orange"> Explore </v-btn>
-              </v-card-actions>
+              <v-card-actions> </v-card-actions>
             </v-card>
           </v-col>
         </div>
       </v-row>
+      </section>
+      <section class="mt-5" >
+        
+        <v-btn
+          prepend-icon="mdi-check"
+          rounded="x-large"
+          class="bg-blue-lighten-3"
+          size="large"
+          @click="cartStore.placrOrder(cartStore.orderData)"
+        >
+          place Order
+        </v-btn>
+      </section>
     </v-container>
   </div>
 </template>
@@ -55,6 +69,9 @@
 <script setup>
 import { useCartStore } from "~/store/cart";
 const cartStore = useCartStore();
+
+// import { useCheckoutStore } from "~/store/checkout";
+// const checkoutStore = useCheckoutStore();
 </script>
 
 <style lang="scss" scoped>

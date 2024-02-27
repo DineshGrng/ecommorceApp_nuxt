@@ -1,7 +1,7 @@
 <template>
     <div style="height:100vh; display:flex; align-items:center;">
       <v-container>
-        {{ userData }}
+        <!-- {{ userData }} -->
         <v-label class="text-h3">Welcome to Login Page</v-label>
         <v-text-field label="Email" v-model="userData.email"></v-text-field>
         <v-text-field label="Password" v-model="userData.password"></v-text-field>

@@ -3,7 +3,9 @@
     <NuxtLoadingIndicator />
     <v-layout>
       <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
-
+      <!-- <v-system-bar class="bg-blue-darken-2">
+        <span >{{ companyStore.company.address }}</span>
+      </v-system-bar> -->
       <v-app-bar color="primary" prominent>
         <v-app-bar-nav-icon
           variant="text"
@@ -11,15 +13,11 @@
         ></v-app-bar-nav-icon>
 
         <v-toolbar-title>
-          <v-btn
-            variant="text"
-            @click="$router.push('/')"
-          >
-          <!-- <v-img height="75" :src="companyStore.company.logo" :lazy-src="companyStore.company.logo">
+          <v-btn variant="text" @click="$router.push('/')">
+            <!-- <v-img height="75" :src="companyStore.company.logo" :lazy-src="companyStore.company.logo">
 
           </v-img> -->
-             {{companyStore.company.name}}</v-btn
-          >
+            {{ companyStore.company.name }}</v-btn>
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -74,7 +72,6 @@
       </v-navigation-drawer>
 
       <v-main>
-
         <slot />
       </v-main>
     </v-layout>
