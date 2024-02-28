@@ -47,5 +47,22 @@ export const useAuthStore = defineStore("auth", {
                 this.loading = false;
             }
         },
+
+        async registerUser(userDetails){
+            try {
+                this.loading = true;
+                var response = await axiosApi.post("register", userDetails);
+
+                if(response.status === 200){
+                    this.message = response.data.data.message;
+                    alert(this.message);
+                }
+            }catch(e){
+                console.warn(e);
+            }finally {
+                this.loading = false;
+            }
+
+        },
     }
 });  
